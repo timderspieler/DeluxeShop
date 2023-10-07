@@ -1,0 +1,9 @@
+name: DeluxeShop
+version: 0.5
+description: Shop Addon for free use in other plugins
+author: timderspieler
+api-version: 1.13
+main: de.timderspieler.deluxeshop.main.DeluxeShop
+depend: [Citizens]
+commands:
+   deluxeshop:

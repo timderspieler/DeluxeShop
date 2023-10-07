@@ -1,0 +1,40 @@
+##################################################################################################
+#                                                                                                #
+# DeluxeShop                                                                                     #
+#                                                                                                #
+# Welcome to DeluxeShop. DeluxeShop is an easy to use shop and simple shop plugin which lets you #
+# sell goodies to your players. You can configure different requirements for each item and you   #
+# you can use different currencies in the shop which makes this really unique.                   #
+#                                                                                                #
+# Supported versions: 1.8.x, 1.9.x, 1.10.x, 1.11.x, 1.12.x, 1.13.x, 1.14.x, 1.15.x, 1.16.x       #
+#                                                                                                #
+# Official supported plugins: DeluxeCombat, TrickOrTreat                                         #
+#                                                                                                #
+##################################################################################################
+
+# The inventory title of the shop
+Shop-Title: "&5DeluxeShop"
+
+# The permission to open the shop
+Shop-Permission: "deluxeshop.open"
+
+None: "None"
+
+Purchase-Item:
+   Name: "&a&lPurchase"
+   Lore: "&7Click to purchase!"
+   
+Cancel-Item:
+   Name: "&c&lCancel"
+   Lore: "&7Click to cancel!"
+   
+Buy-Information:
+   Name: "&b&lBuy Information"
+   Lore: "=&ePrice: &f%amount% %currency%=&eRequirement: &f%requirement_value% %requirement%"
+   
+No-Permission: "&cYou dont have permission!"
+
+Item-Purchased: "&7You &dsuccessfully &7bought the item: %item%&r&7 for &d%amount% &7%currency%!"
+Requirement-Not-Meeted: "&7You dont meet the requirement that is needed to purchase this item! (&c%requirement% &7-> &c%requirement_value%&7)"
+Not-Enough-Money: "&7You dont have enough &c%currency% &7to purchase this item!"
+

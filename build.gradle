@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'de.timderspieler.deluxeshop'
+version '0.6'
+
+repositories {
+
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+
+        // As of Gradle 5.1, you can limit this to only those
+        // dependencies you expect from it
+        content {
+            includeGroup 'org.bukkit'
+            includeGroup 'org.spigotmc'
+        }
+    }
+
+    mavenCentral()
+
+    maven { url "https://maven.enginehub.org/repo/" }
+    maven { url "https://jitpack.io/" }
+    maven { url "https://maven.citizensnpcs.co/repo/" }
+
+}
+
+dependencies {
+    // Pick only one of these and read the comment in the repositories block.
+    compileOnly('org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT') // The Spigot API with no shadowing. Requires the OSS repo.
+    implementation('com.github.cryptomorin:XSeries:+')
+    compileOnly('net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT') {
+        exclude group: '*', module: '*'
+    }
+}
+
+shadowJar {
+    relocate 'com.cryptomorin', 'nl.marido.deluxecombat.shaded'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release.set(8)
+}
