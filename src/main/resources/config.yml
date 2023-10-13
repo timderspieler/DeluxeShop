@@ -20,6 +20,8 @@ Shop-Permission: "deluxeshop.open"
 
 None: "None"
 
+In-Shop-Lore: "=&ePrice: &f%amount% %currency%=&eRequirement: &f%requirement_value% %requirement%==&7&oClick to purchase!"
+
 Purchase-Item:
    Name: "&a&lPurchase"
    Lore: "&7Click to purchase!"

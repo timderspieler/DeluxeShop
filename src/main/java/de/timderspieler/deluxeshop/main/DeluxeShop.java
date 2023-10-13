@@ -51,6 +51,7 @@ extends JavaPlugin {
 	private String shop_title = "";
 	private String no_perm = "";
 	private String open_perm = "";
+	private String in_shop_lore = "";
 	
 	@Override
 	public void onEnable() {
@@ -66,6 +67,7 @@ extends JavaPlugin {
 		
 		shop_title = ChatColor.translateAlternateColorCodes('&', getFM().getDefaultConfig().getString("Shop-Title"));
 		no_perm = ChatColor.translateAlternateColorCodes('&', getFM().getDefaultConfig().getString("No-Permission"));
+		in_shop_lore = getFM().getDefaultConfig().getString("In-Shop-Lore");
 		open_perm = getFM().getDefaultConfig().getString("Shop-Permission");
 		
 		Bukkit.getPluginManager().registerEvents(new Admin_ShopClick(), this);
@@ -199,7 +201,27 @@ extends JavaPlugin {
 		
 		Inventory temp = Bukkit.createInventory(null, 54, getShopTitle());
 		loadInShopItems(temp);
-		
+
+		for (int i = 0; i < temp.getSize(); i++) {
+			if (items.containsKey(i)) {
+				ShopItem si = items.get(i);
+				ItemStack current = temp.getItem(i);
+				String info_lore = "" + in_shop_lore;
+				info_lore = info_lore.replaceAll("%currency%", si.getCurrency());
+				info_lore = info_lore.replaceAll("%amount%", "" + si.getPrice());
+
+				if (!si.getRequirement_type().equalsIgnoreCase("none")) {
+					info_lore = info_lore.replaceAll("%requirement%", si.getRequirement_type());
+					info_lore = info_lore.replaceAll("%requirement_value%", si.getRequirement_value());
+				} else {
+					info_lore = info_lore.replaceAll("%requirement%", ChatColor.translateAlternateColorCodes('&', getFM().getDefaultConfig().getString("None")));
+					info_lore = info_lore.replaceAll("%requirement_value%", "");
+				}
+				getIU().addLores(current, info_lore);
+				temp.setItem(i, current);
+			}
+		}
+
 		opened_shops.put(p, temp);
 		
 		p.openInventory(temp);

@@ -1,5 +1,6 @@
 package de.timderspieler.deluxeshop.main;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +81,17 @@ public class ItemUtils {
 		is.setItemMeta(result);
 		
 	}
+
+	public void addLores(ItemStack is, String line) {
+		ItemMeta result = is.getItemMeta();
+		List<String> lores = result.getLore();
+		if (lores == null) {
+			lores = new ArrayList<>();
+		}
+		lores.addAll(Arrays.asList(ChatColor.translateAlternateColorCodes('&', line).split("\\=")));
+		result.setLore(lores);
+		is.setItemMeta(result);
+	}
 	
 	@SuppressWarnings("deprecation")
 	public void applyShort(ItemStack is, short data) {
@@ -113,102 +125,4 @@ public class ItemUtils {
 		is.setItemMeta(meta);
 		
 	}
-	
-//    private short getShortFromColorname(String color) {
-//    	
-//    	if (color.equalsIgnoreCase("RED")) {
-//    		return 1;
-//    	} else if (color.equalsIgnoreCase("BLUE")) {
-//    		return 12;
-//    	} else if (color.equalsIgnoreCase("GREEN")) {
-//    		return 10;
-//    	} else if (color.equalsIgnoreCase("YELLOW")) {
-//    		return 11;
-//    	} else if (color.equalsIgnoreCase("ORANGE")) {
-//    		return 14;
-//    	} else if (color.equalsIgnoreCase("TURQUOISE")) {
-//    		return 6;
-//    	} else if (color.equalsIgnoreCase("PINK")) {
-//    		return 13;
-//    	} else if (color.equalsIgnoreCase("PURPLE")) {
-//    		return 5;
-//    	} else if (color.equalsIgnoreCase("GRAY")) {
-//    		return 8;
-//    	} else if (color.equalsIgnoreCase("WHITE")) {
-//    		return 7;
-//    	} else if (color.equalsIgnoreCase("LIME")) {
-//    		return 10;
-//    	} else if (color.equalsIgnoreCase("LIGHT_BLUE")) {
-//    		return 12;
-//    	} else if (color.equalsIgnoreCase("CYAN")) {
-//    		return 6;
-//    	} else if (color.equalsIgnoreCase("BLACK")) {
-//    		return 15;
-//    	}
-//    	
-//    	return 0;
-//    	
-//    }
-    
-    public String getColorFromBoolean(boolean bool) {
-    	return (bool == true ? "LIME" : "GRAY");
-    }
-    
-    public List<String> cutStringForLore(String input) {
-    	
-    	List<String> result = new ArrayList<>();
-    	
-    	if (!(input.length() <= 25)) {
-    		
-    		while(input.length() > 25) {
-    			
-    			result.add(input.substring(0, 25));
-    			input = input.substring(25);
-    			
-    		}
-    		
-    	} else {
-    		result.add(input);
-    	}
-    	
-//    	result.add(input);
-    	
-    	return result;
-    	
-    }
-    
-	public int freeSlots(Player p) {
-		
-		int anzahl = 0;
-		
-		for (ItemStack all : p.getInventory().getContents()) {
-			
-			if (all == null) {
-				anzahl = anzahl + 1;
-			}
-			
-		}
-		
-		PlayerInventory invt = p.getInventory();
-		
-		if (invt.getHelmet() == null) {
-			anzahl -= 1;
-		}
-		
-		if (invt.getChestplate() == null) {
-			anzahl -= 1;
-		}
-		
-		if (invt.getLeggings() == null) {
-			anzahl -= 1;
-		}
-		
-		if (invt.getBoots() == null) {
-			anzahl -= 1;
-		}
-		
-		return anzahl;
-		
-	}
-
 }
